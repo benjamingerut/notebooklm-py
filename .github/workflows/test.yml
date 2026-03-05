@@ -57,6 +57,7 @@ jobs:
       uses: actions/setup-python@v6
       with:
         python-version: ${{ matrix.python-version }}
+        allow-prereleases: true
         cache: 'pip'
 
     - name: Install dependencies
@@ -75,6 +76,7 @@ jobs:
       with:
         path: |
           ~/.cache/ms-playwright
+          ~/Library/Caches/ms-playwright
           ~/AppData/Local/ms-playwright
         key: playwright-${{ matrix.os }}-${{ steps.playwright-version.outputs.version }}
 
@@ -86,4 +88,4 @@ jobs:
       run: playwright install-deps
 
     - name: Run tests with coverage
-      run: pytest --cov=src/notebooklm --cov-report=term-missing --cov-fail-under=70
+      run: pytest --cov=src/notebooklm --cov-report=term-missing

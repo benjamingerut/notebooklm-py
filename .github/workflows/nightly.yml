@@ -2,10 +2,8 @@ name: Nightly E2E Tests
 
 on:
   schedule:
-    # Main branch: 6 AM UTC (10 PM PST / 1 AM EST)
+    # Run daily at 6 AM UTC (10 PM PST / 1 AM EST)
     - cron: '0 6 * * *'
-    # Develop branch: 11 AM UTC (3 AM PST / 6 AM EST) - 5 hours later
-    - cron: '0 11 * * *'
   workflow_dispatch:
     inputs:
       test_filter:
@@ -30,12 +28,7 @@ jobs:
         id: resolve
         run: |
           if [ "${{ github.event_name }}" = "schedule" ]; then
-            # Scheduled: determine from cron expression
-            if [ "${{ github.event.schedule }}" = "0 6 * * *" ]; then
-              echo "branch=main" >> $GITHUB_OUTPUT
-            else
-              echo "branch=develop" >> $GITHUB_OUTPUT
-            fi
+            echo "branch=main" >> $GITHUB_OUTPUT
             echo "is_standard=true" >> $GITHUB_OUTPUT
           else
             # Manual: use custom_branch if set, otherwise use triggering branch
@@ -46,8 +39,7 @@ jobs:
               TARGET="${{ github.ref_name }}"
             fi
             echo "branch=$TARGET" >> $GITHUB_OUTPUT
-            # Check if it's main or develop
-            if [ "$TARGET" = "main" ] || [ "$TARGET" = "develop" ]; then
+            if [ "$TARGET" = "main" ]; then
               echo "is_standard=true" >> $GITHUB_OUTPUT
             else
               echo "is_standard=false" >> $GITHUB_OUTPUT
