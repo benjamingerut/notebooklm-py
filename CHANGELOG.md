@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **Cinematic video support** - Generate documentary-style videos using Veo 3 AI
+  - `notebooklm generate cinematic-video` CLI command (alias for `generate video --format cinematic`)
+  - `notebooklm download cinematic-video` CLI command (alias for `download video`)
+  - `client.artifacts.generate_cinematic_video()` Python API method
+  - `VideoFormat.CINEMATIC` enum value (format code 3)
+  - Requires Google AI Ultra subscription; generation takes ~30-40 min
+
 ## [0.3.3] - 2026-03-03
 
 ### Added

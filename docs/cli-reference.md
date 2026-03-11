@@ -122,7 +122,8 @@ All generate commands support:
 | Command | Options | Example |
 |---------|---------|---------|
 | `audio [description]` | `--format [deep-dive\|brief\|critique\|debate]`, `--length [short\|default\|long]`, `--wait` | `generate audio "Focus on history"` |
-| `video [description]` | `--format [explainer\|brief]`, `--style [auto\|classic\|whiteboard\|kawaii\|anime\|watercolor\|retro-print\|heritage\|paper-craft]`, `--wait` | `generate video "Explainer for kids"` |
+| `video [description]` | `--format [explainer\|brief\|cinematic]`, `--style [auto\|classic\|whiteboard\|kawaii\|anime\|watercolor\|retro-print\|heritage\|paper-craft]`, `--wait` | `generate video "Explainer for kids"` |
+| `cinematic-video [description]` | `--wait`, `--json` | `generate cinematic-video "documentary overview"` |
 | `slide-deck [description]` | `--format [detailed\|presenter]`, `--length [default\|short]`, `--wait` | `generate slide-deck` |
 | `revise-slide <description>` | `-a/--artifact <id>` (required), `--slide N` (required), `--wait` | `generate revise-slide "Move title up" --artifact <id> --slide 0` |
 | `quiz [description]` | `--difficulty [easy\|medium\|hard]`, `--quantity [fewer\|standard\|more]`, `--wait` | `generate quiz --difficulty hard` |
@@ -151,6 +152,7 @@ All generate commands support:
 |---------|-----------|---------|---------|
 | `audio [path]` | Output path | `-a/--artifact`, `--all`, `--latest`, `--name`, `--force`, `--dry-run` | `download audio --all` |
 | `video [path]` | Output path | `-a/--artifact`, `--all`, `--latest`, `--name`, `--force`, `--dry-run` | `download video --latest` |
+| `cinematic-video [path]` | Output path | `-a/--artifact`, `--all`, `--latest`, `--name`, `--force`, `--dry-run` | `download cinematic-video ./cinematic.mp4` |
 | `slide-deck [path]` | Output path      | `-a/--artifact`, `--all`, `--latest`, `--name`, `--force`, `--dry-run`, `--format [pdf\|pptx]` | `download slide-deck ./slides.pdf` |
 | `infographic [path]` | Output path | `-a/--artifact`, `--all`, `--latest`, `--name`, `--force`, `--dry-run` | `download infographic ./info.png` |
 | `report [path]` | Output path | `-a/--artifact`, `--all`, `--latest`, `--name`, `--force`, `--dry-run` | `download report ./report.md` |
@@ -527,8 +529,8 @@ notebooklm generate video [description] [OPTIONS]
 ```
 
 **Options:**
-- `--format [explainer|brief]` - Video format
-- `--style [auto|classic|whiteboard|kawaii|anime|watercolor|retro|heritage|paper-craft]` - Visual style
+- `--format [explainer|brief|cinematic]` - Video format (cinematic uses Veo 3 AI documentary footage)
+- `--style [auto|classic|whiteboard|kawaii|anime|watercolor|retro|heritage|paper-craft]` - Visual style (ignored for cinematic)
 - `--language LANG` - Language code
 - `-s, --source ID` - Use specific source(s) (repeatable, uses all if not specified)
 - `--wait` - Wait for generation to complete
@@ -542,11 +544,39 @@ notebooklm generate video "Explain for 5 year olds" --style kawaii
 # Professional style
 notebooklm generate video --style classic --wait
 
+# Cinematic documentary footage (Veo 3, requires AI Ultra)
+notebooklm generate video --format cinematic "documentary overview"
+
 # Generate from specific sources only
 notebooklm generate video -s src_123 -s src_456
 
 # JSON output for scripting/automation
 notebooklm generate video --json
+```
+
+> **Note:** Cinematic videos use Veo 3 AI to generate documentary-style footage and take ~30-40 minutes. They require a Google AI Ultra subscription. The `--style` option is ignored for cinematic format. You can also use `generate cinematic-video` as a shortcut.
+
+### Generate: `cinematic-video`
+
+Alias for `generate video --format cinematic`. Generates a cinematic video overview using Veo 3 AI documentary-style footage.
+
+```bash
+notebooklm generate cinematic-video [description] [OPTIONS]
+```
+
+**Options:**
+- `--language LANG` - Language code
+- `-s, --source ID` - Use specific source(s) (repeatable)
+- `--wait` - Wait for generation to complete
+- `--json` - Output as JSON
+
+**Examples:**
+```bash
+# Generate cinematic video
+notebooklm generate cinematic-video "documentary about quantum physics"
+
+# Wait for completion
+notebooklm generate cinematic-video --wait
 ```
 
 ### Generate: `revise-slide`

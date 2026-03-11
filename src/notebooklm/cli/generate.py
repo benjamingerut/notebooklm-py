@@ -556,7 +556,7 @@ generate.add_command(_cinematic_video_gen_cmd)
 @click.option(
     "--length",
     "deck_length",
-    type=click.Choice(["default", "short"]),
+    type=click.Choice(["default", "short", "long"]),
     default="default",
 )
 @click.option("--language", default=None, help="Output language (default: from config or 'en')")
@@ -596,6 +596,7 @@ def generate_slide_deck(
     length_map = {
         "default": SlideDeckLength.DEFAULT,
         "short": SlideDeckLength.SHORT,
+        "long": SlideDeckLength.LONG,
     }
 
     async def _run():

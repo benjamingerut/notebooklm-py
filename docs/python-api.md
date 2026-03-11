@@ -296,6 +296,7 @@ print(f"Keywords: {guide['keywords']}")
 |--------|------------|---------|-------------|
 | `generate_audio(...)` | See below | `GenerationStatus` | Generate podcast |
 | `generate_video(...)` | See below | `GenerationStatus` | Generate video |
+| `generate_cinematic_video(...)` | See below | `GenerationStatus` | Generate cinematic video (Veo 3 AI documentary footage) |
 | `generate_report(...)` | See below | `GenerationStatus` | Generate report |
 | `generate_quiz(...)` | See below | `GenerationStatus` | Generate quiz |
 | `generate_flashcards(...)` | See below | `GenerationStatus` | Generate flashcards |
@@ -432,8 +433,16 @@ status = await client.artifacts.generate_video(
     notebook_id,
     source_ids=None,
     instructions="...",
-    video_format=VideoFormat.EXPLAINER,  # EXPLAINER, BRIEF
+    video_format=VideoFormat.EXPLAINER,  # EXPLAINER, BRIEF, CINEMATIC
     video_style=VideoStyle.AUTO_SELECT,  # AUTO_SELECT, CLASSIC, WHITEBOARD, KAWAII, ANIME, etc.
+    language="en"
+)
+
+# Cinematic Video (Veo 3 AI documentary footage, requires AI Ultra)
+status = await client.artifacts.generate_cinematic_video(
+    notebook_id,
+    source_ids=None,
+    instructions="...",
     language="en"
 )
 
@@ -946,6 +955,7 @@ class AudioLength(Enum):
 class VideoFormat(Enum):
     EXPLAINER = 1
     BRIEF = 2
+    CINEMATIC = 3
 
 class VideoStyle(Enum):
     AUTO_SELECT = 1
@@ -1007,6 +1017,7 @@ class SlideDeckFormat(Enum):
 class SlideDeckLength(Enum):
     DEFAULT = 1
     SHORT = 2
+    LONG = 3
 ```
 
 ### Export

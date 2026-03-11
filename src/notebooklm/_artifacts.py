@@ -840,7 +840,7 @@ class ArtifactsAPI:
             language: Language code (default: "en").
             instructions: Custom instructions for slide deck generation.
             slide_format: DETAILED_DECK or PRESENTER_SLIDES.
-            slide_length: DEFAULT or SHORT.
+            slide_length: DEFAULT, SHORT, or LONG.
 
         Returns:
             GenerationStatus with task_id for polling.

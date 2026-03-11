@@ -252,6 +252,7 @@ class SlideDeckLength(int, Enum):
 
     DEFAULT = 1
     SHORT = 2
+    LONG = 3
 
 
 class ReportFormat(str, Enum):

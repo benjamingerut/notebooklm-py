@@ -535,8 +535,43 @@ params = [
                 language,             # "en"
                 instructions,
                 None,
-                format_code,          # 1=EXPLAINER, 2=BRIEF
+                format_code,          # 1=EXPLAINER, 2=BRIEF, 3=CINEMATIC
                 style_code,           # 1=AUTO, 2=CUSTOM, 3=CLASSIC, 4=WHITEBOARD, etc.
+            ],
+        ],                            # [8]
+    ],
+]
+```
+
+#### Cinematic Video Overview (Type 3, Format 3)
+
+**Source:** `_artifacts.py::generate_cinematic_video()`
+
+Uses the same `CREATE_ARTIFACT` RPC as standard videos with `VideoFormat.CINEMATIC` (format_code=3).
+Cinematic videos omit the `style_code` parameter (Veo 3 AI generates documentary-style footage).
+
+```python
+params = [
+    [2],
+    notebook_id,
+    [
+        None,                         # [0]
+        None,                         # [1]
+        3,                            # [2]: ArtifactTypeCode.VIDEO
+        source_ids_triple,            # [3]
+        None,                         # [4]
+        None,                         # [5]
+        None,                         # [6]
+        None,                         # [7]
+        [
+            None,
+            None,
+            [
+                source_ids_double,
+                language,             # "en"
+                instructions,
+                None,
+                3,                    # VideoFormat.CINEMATIC (no style_code)
             ],
         ],                            # [8]
     ],

@@ -60,7 +60,7 @@
 | Type | Options | Download Format |
 |------|---------|-----------------|
 | **Audio Overview** | 4 formats (deep-dive, brief, critique, debate), 3 lengths, 50+ languages | MP3/MP4 |
-| **Video Overview** | 2 formats, 9 visual styles (classic, whiteboard, kawaii, anime, etc.) | MP4 |
+| **Video Overview** | 3 formats (explainer, brief, cinematic), 9 visual styles; cinematic uses Veo 3 AI (requires AI Ultra) | MP4 |
 | **Slide Deck** | Detailed or presenter format, adjustable length; individual slide revision | PDF, PPTX |
 | **Infographic** | 3 orientations, 3 detail levels | PNG |
 | **Quiz** | Configurable quantity and difficulty | JSON, Markdown, HTML |
@@ -131,6 +131,7 @@ notebooklm ask "What are the key themes?"
 # 4. Generate content
 notebooklm generate audio "make it engaging" --wait
 notebooklm generate video --style whiteboard --wait
+notebooklm generate cinematic-video "documentary overview" --wait
 notebooklm generate quiz --difficulty hard
 notebooklm generate flashcards --quantity more
 notebooklm generate slide-deck
